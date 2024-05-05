@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const fs_1 = __importDefault(require("fs"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const https_1 = __importDefault(require("https"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.text());
@@ -23,6 +24,10 @@ app.post('/api/newsletter/emails/new', (req, res) => {
         res.send('Data written to file successfully.');
     });
 });
-app.listen(4000, () => {
+const privateKey = fs_1.default.readFileSync('./SSL/private.key', 'utf8');
+const certificate = fs_1.default.readFileSync('./SSL/certificate.crt', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const httpsServer = https_1.default.createServer(credentials, app);
+httpsServer.listen(4000, () => {
     console.log('Server running on port 4000');
 });
