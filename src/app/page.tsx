@@ -9,7 +9,7 @@ function sleep(ms: number) {
 
 export default function Home() {
   const [email, setEmail] = React.useState('')
-  const [submitted, setSubmitted] = React.useState(true)
+  const [submitted, setSubmitted] = React.useState(false)
   const handleSubmit = async () => {
     setSubmitted(true)
     axios.post('https://gyg.grabyourservices.com:4004/api/newsletter/emails/new', email, {
