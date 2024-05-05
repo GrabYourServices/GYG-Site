@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import fs from 'fs'
 import bodyParser from 'body-parser'
+import https from 'https'
 
 const app = express()
 app.use(cors())
@@ -21,6 +22,11 @@ app.post('/api/newsletter/emails/new', (req,res) => {
     });   
 })
 
-app.listen(4000, () => {
+const privateKey = fs.readFileSync('path/to/private.key', 'utf8')
+const certificate = fs.readFileSync('path/to/certificate.crt', 'utf8')
+const credentials = { key: privateKey, cert: certificate }
+const httpsServer = https.createServer(credentials, app)
+
+httpsServer.listen(4000, () => {
     console.log('Server running on port 4000')
 })
