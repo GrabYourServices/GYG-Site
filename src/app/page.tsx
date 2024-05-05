@@ -12,7 +12,7 @@ export default function Home() {
   const [submitted, setSubmitted] = React.useState(true)
   const handleSubmit = async () => {
     setSubmitted(true)
-    axios.post('http://localhost:4000/api/newsletter/emails/new', email, {
+    axios.post('https://gyg.grabyourservices.com:4004/api/newsletter/emails/new', email, {
       headers: {
         'Content-Type': 'text/plain'
       }

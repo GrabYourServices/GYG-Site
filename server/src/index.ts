@@ -27,6 +27,6 @@ const certificate = fs.readFileSync('./SSL/certificate.crt', 'utf8')
 const credentials = { key: privateKey, cert: certificate }
 const httpsServer = https.createServer(credentials, app)
 
-httpsServer.listen(4000, () => {
-    console.log('Server running on port 4000')
+httpsServer.listen(4004, () => {
+    console.log('Server running on port 4004')
 })
